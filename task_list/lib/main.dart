@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 List<dynamic> _taskList = [];
 
 final TextEditingController txtCtrl = TextEditingController();
 final FocusNode txtFocus = FocusNode();
-
-//db
-final db = FirebaseDatabase.instance.reference();
 
 Future<String> getDirectory() async {
   var path = await getApplicationDocumentsDirectory();
@@ -67,9 +61,6 @@ class _BodyState extends State<Body> {
                   txtCtrl.text = "";
                   updateCachedData();
                   print('sdaghsd');
-                  db
-                      .child('${_taskList.length}')
-                      .set({'id': txtCtrl.text, 'value': false});
                 },
                 color: Colors.lightBlue,
                 child: Text(
